@@ -166,8 +166,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Tab navigation functionality
     homeTab.addEventListener('click', function() {
         adminLogin.style.display = 'none';
-        adminInterface.style.display = 'none';
-        journeyDetails.style.display = 'none';
+        adminInterface.style.display = 'block';
+        journeyDetails.style.display = 'block';
         homeContent.style.display = 'block';
     });
     
