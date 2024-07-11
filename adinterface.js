@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function fetchDataFromCSV() {
         // Replace with the path to your actual CSV file
         const csvUrl = 'https://github.com/MuhammedAnees-loony/test2/blob/main/login.csv';
-        return fetch('https://github.com/MuhammedAnees-loony/test2/blob/main/login.csv')
+        return fetch(csvUrl)
             .then(response => response.text())
             .then(data => {
                 const rows = data.split('\n').slice(1); // Skip header row
