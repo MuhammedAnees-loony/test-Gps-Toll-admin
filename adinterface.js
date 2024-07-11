@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 jsonObject.forEach(item => {
                     distances.push(item.distance);
                     fees.push(item.fee);
+                    displayJourneyData();
                 });
     
     // Now you have two arrays: distances and fees
