@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
         if (username === adminCredentials.username && password === adminCredentials.password) {
             adminLogin.style.display = 'none';
-            adminInterface.style.display = 'block';
+            adminInterface.style.display = 'none';
+            homeContent.style.display = 'block'; // Show home tab contents
             populateUserTables(); // Populate user tables
             homeTab.click(); // Activate home tab
         } else {
@@ -178,5 +179,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Initial tab activation
-    homeTab.click(); // Show home tab by default
-});                          
+    loginTab.click(); // Show login tab by default
+});    
