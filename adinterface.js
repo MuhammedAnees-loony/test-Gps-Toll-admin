@@ -20,30 +20,13 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Function to fetch data from CSV file
-    async function fetchDataFromCSV(url) {
-        const response = await fetch(url);
+    async function fetchDataFromCSV() {
+        const response = await fetch('https://raw.githubusercontent.com/MuhammedAnees-loony/test/main/login.csv');
         const data = await response.text();
         const rows = data.split('\n').slice(1); // Remove header row
         return rows.map(row => {
-            const [username, userId, vehicleId] = row.split(',');
-            return { username, userId, vehicleId };
-        });
-    }
-
-    // Populate home user table
-    async function populateHomeUserTable() {
-        const users = await fetchDataFromCSV('https://raw.githubusercontent.com/MuhammedAnees-loony/test/main/login.csv');
-        users.forEach(user => {
-            const row = document.createElement('tr');
-            const userIdCell = document.createElement('td');
-            const vehicleIdCell = document.createElement('td');
-
-            userIdCell.textContent = user.userId;
-            vehicleIdCell.textContent = user.vehicleId;
-
-            row.appendChild(userIdCell);
-            row.appendChild(vehicleIdCell);
-            homeUserTableBody.appendChild(row);
+            const [userId, vehicleId] = row.split(',');
+            return { userId, vehicleId };
         });
     }
 
@@ -56,28 +39,90 @@ document.addEventListener("DOMContentLoaded", function() {
         if (username === adminCredentials.username && password === adminCredentials.password) {
             adminLogin.style.display = 'none';
             adminInterface.style.display = 'block';
-            populateUserTable(); // Populate admin user table
+            populateUserTables(); // Populate user tables
             homeTab.click(); // Activate home tab
         } else {
             alert('Invalid credentials');
         }
     });
 
-    // Populate admin user table
-    function populateUserTable() {
-        fetchDataFromCSV('https://raw.githubusercontent.com/MuhammedAnees-loony/test/main/login.csv').then(users => {
+    // Populate user tables
+    function populateUserTables() {
+        fetchDataFromCSV().then(users => {
+            // Clear existing table bodies
+            homeUserTableBody.innerHTML = '';
+            userTableBody.innerHTML = '';
+
             users.forEach(user => {
-                const row = document.createElement('tr');
-                const userIdCell = document.createElement('td');
-                const vehicleIdCell = document.createElement('td');
+                if (user.userId.startsWith('CC-') && user.vehicleId.startsWith('V')) {
+                    // Create row for admin interface table
+                    const adminRow = document.createElement('tr');
+                    const adminUserIdCell = document.createElement('td');
+                    const adminVehicleIdCell = document.createElement('td');
 
-                userIdCell.textContent = user.userId;
-                vehicleIdCell.textContent = user.vehicleId;
+                    adminUserIdCell.textContent = user.userId;
+                    adminVehicleIdCell.textContent = user.vehicleId;
 
-                row.appendChild(userIdCell);
-                row.appendChild(vehicleIdCell);
-                userTableBody.appendChild(row);
+                    adminRow.appendChild(adminUserIdCell);
+                    adminRow.appendChild(adminVehicleIdCell);
+                    userTableBody.appendChild(adminRow);
+
+                    // Create row for home tab table
+                    const homeRow = document.createElement('tr');
+                    const homeUserIdCell = document.createElement('td');
+                    const homeVehicleIdCell = document.createElement('td');
+
+                    homeUserIdCell.textContent = user.userId;
+                    homeVehicleIdCell.textContent = user.vehicleId;
+
+                    homeRow.appendChild(homeUserIdCell);
+                    homeRow.appendChild(homeVehicleIdCell);
+                    homeUserTableBody.appendChild(homeRow);
+                }
             });
+        });
+    }
+
+    // Function to fetch journey data
+    function fetchJourneyData(vehicleId) {
+        const apiUrl = 'http://127.0.0.1:5000/predict'; // Replace with your Flask API URL
+
+        // Prepare the request body
+        const requestBody = {
+            vehicle_id: vehicleId
+        };
+
+        // Send POST request to Flask API
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Expecting JSON response
+        })
+        .then(data => {
+            console.log('Journey data fetched successfully:', data);
+            let jsonObject = JSON.parse(data);
+            let distances = [];
+            let fees = [];
+            // Loop through the JSON object and extract values
+            jsonObject.forEach(item => {
+                distances.push(item.distance);
+                fees.push(item.fee);
+            });
+
+            // Now you have two arrays: distances and fees
+            console.log("Distances:", distances);
+            console.log("Fees:", fees);
+        })
+        .catch(error => {
+            console.error('Error making POST request to Flask API:', error);
         });
     }
 
@@ -128,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
         adminInterface.style.display = 'block';
         journeyDetails.style.display = 'block';
         homeContent.style.display = 'block';
-        populateHomeUserTable(); // Populate home user table
+        populateUserTables(); // Populate home user table
     });
 
     // Switch to login/register tab on click
@@ -138,4 +183,5 @@ document.addEventListener("DOMContentLoaded", function() {
         journeyDetails.style.display = 'none';
         homeContent.style.display = 'none';
     });
+    homeTab.click();
 });
