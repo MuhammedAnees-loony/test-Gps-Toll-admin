@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return rows.map(row => {
             const [username, password, userId, vehicleId] = row.split(',');
             return { userId, vehicleId };
+            console.log('returned');
         });
     }
 
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (username === adminCredentials.username && password === adminCredentials.password) {
             adminLogin.style.display = 'none';
             adminInterface.style.display = 'block';
-            populateUserTables(); // Populate user tables
+            populateHomeUserTables(); // Populate user tables
             homeTab.click(); // Activate home tab
         } else {
             alert('Invalid credentials');
