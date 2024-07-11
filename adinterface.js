@@ -89,8 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
-    // Fetch journey data and update the journey details section
+        // Function to fetch journey data
     function fetchJourneyData(vehicleId) {
         const apiUrl = 'http://127.0.0.1:5000/predict'; // Replace with your Flask API URL
     
@@ -115,56 +114,63 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             console.log('Journey data fetched successfully:', data);
-            let jsonObject = JSON.parse(data);
-            let distances = [];
-            let fees = [];
-            // Loop through the JSON object and extract values
-            jsonObject.forEach(item => {
-                distances.push(item.distance);
-                fees.push(item.fee);
-            });
+                let jsonObject = JSON.parse(data);
+    // Loop through the JSON object and extract values
+                jsonObject.forEach(item => {
+                    distances.push(item.distance);
+                    fees.push(item.fee);
+                });
     
-            // Populate the journey details table
-            document.getElementById('journey1Distance').textContent = distances[0];
-            document.getElementById('journey1Fee').textContent = fees[0];
-            document.getElementById('journey1PaymentStatus').textContent = data.journey1.payment_status;
-    
-            document.getElementById('journey2Distance').textContent = distances[1];
-            document.getElementById('journey2Fee').textContent = fees[1];
-            document.getElementById('journey2PaymentStatus').textContent = data.journey2.payment_status;
-    
-            document.getElementById('journey3Distance').textContent = distances[2];
-            document.getElementById('journey3Fee').textContent = fees[2];
-            document.getElementById('journey3PaymentStatus').textContent = data.journey3.payment_status;
-    
-            document.getElementById('journey4Distance').textContent = distances[3];
-            document.getElementById('journey4Fee').textContent = fees[3];
-            document.getElementById('journey4PaymentStatus').textContent = data.journey4.payment_status;
-    
-            document.getElementById('journey5Distance').textContent = distances[4];
-            document.getElementById('journey5Fee').textContent = fees[4];
-            document.getElementById('journey5PaymentStatus').textContent = data.journey5.payment_status;
-    
-            // Populate the total summary
-            document.getElementById('totalDistance').textContent = distances.reduce((acc, curr) => acc + curr, 0);
-            document.getElementById('totalFees').textContent = fees.reduce((acc, curr) => acc + curr, 0);
-    
-            journeyDetails.style.display = 'block'; // Show the journey details section
+    // Now you have two arrays: distances and fees
+                console.log("Distances:", distances);
+                console.log("Fees:", fees);
         })
         .catch(error => {
-            console.error('Error fetching journey data:', error);
+            console.error('Error making POST request to Flask API:', error);
         });
     }
-    
-    // Handle search form submission
-    adminSearchForm.addEventListener('submit', function(event) {
+        // Handle search form submission
+        adminSearchForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const vehicleId = searchVehicleId.value;
         fetchJourneyData(vehicleId); // Fetch journey data for the entered vehicle ID
     });
+    // Function to display journey data
+    function displayJourneyData() {
+        // Check if fees and distances are arrays and not empty
+        if (Array.isArray(fees) && fees.length > 0 && Array.isArray(distances) && distances.length > 0) {
+            // Update the table rows with journey details
+            distances.forEach((distance, index) => {
+                const fee = fees[index];
+                const journeyNumber = index + 1;
     
+                // Update table cells with journey data
+                const distanceCell = document.getElementById(`j${journeyNumber}-distance`);
+                const feeCell = document.getElementById(`j${journeyNumber}-fees`);
+    
+                if (distanceCell && feeCell) {
+                    distanceCell.textContent = `${distance.toFixed(2)} m`;
+                    feeCell.textContent = `Rs${fee.toFixed(2)}`;
+                }
+            });
+    
+            // Log the distances and fees for debugging
+            console.log("Distances:", distances);
+            console.log("Fees:", fees);
+    
+            // Update the total distance and total toll
+            const totalDistance = distances.reduce((acc, curr) => acc + parseFloat(curr), 0).toFixed(2);
+            const totalToll = fees.reduce((acc, curr) => acc + parseFloat(curr), 0).toFixed(2);
+    
+            document.getElementById('totalDistance').textContent = `${totalDistance} m`;
+            document.getElementById('totalToll').textContent = `Rs${totalToll}`;
+    
+        } else {
+            console.error('Fees or distances array is not valid or is empty.');
+        }
+    }  
     // Tab navigation functionality
-    homeTab.addEventListener('click', function() {
+      homeTab.addEventListener('click', function() {
         adminLogin.style.display = 'none';
         adminInterface.style.display = 'block';
         journeyDetails.style.display = 'block';
