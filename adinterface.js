@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (username === adminCredentials.username && password === adminCredentials.password) {
             adminLogin.style.display = 'none';
             adminInterface.style.display = 'block';
-            populateHomeUserTables(); // Populate user tables
+            populateHomeUserTable(); // Populate user tables
             homeTab.click(); // Activate home tab
         } else {
             alert('Invalid credentials');
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function() {
         adminInterface.style.display = 'block';
         journeyDetails.style.display = 'block';
         homeContent.style.display = 'block';
-        populateHomeUserTables(); // Populate home user table
+        populateHomeUserTable(); // Populate home user table
     });
 
     // Switch to login/register tab on click
