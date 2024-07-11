@@ -21,11 +21,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to fetch data from CSV file
     async function fetchDataFromCSV() {
-        const response = await fetch('https://github.com/MuhammedAnees-loony/test2/main/login.csv');
+        const response = await fetch('https://raw.githubusercontent.com/MuhammedAnees-loony/test2/main/login.csv');
         const data = await response.text();
         const rows = data.split('\n').slice(1); // Remove header row
         return rows.map(row => {
-            const [userId, vehicleId] = row.split(',');
+            const [username, password, userId, vehicleId] = row.split(',');
             return { userId, vehicleId };
         });
     }
@@ -45,6 +45,22 @@ document.addEventListener("DOMContentLoaded", function() {
             alert('Invalid credentials');
         }
     });
+     // Populate home user table
+     async function populateHomeUserTable() {
+        const users = await fetchDataFromCSV('https://raw.githubusercontent.com/MuhammedAnees-loony/test2/main/login.csv');
+        users.forEach(user => {
+            const row = document.createElement('tr');
+            const userIdCell = document.createElement('td');
+            const vehicleIdCell = document.createElement('td');
+
+            userIdCell.textContent = user.userId;
+            vehicleIdCell.textContent = user.vehicleId;
+
+            row.appendChild(userIdCell);
+            row.appendChild(vehicleIdCell);
+            homeUserTableBody.appendChild(row);
+        });
+    }
 
     // Populate user tables
     function populateUserTables() {
