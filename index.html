@@ -20,72 +20,73 @@
         </header>
          <div class="main-content">
              <div id="homeContent" style="display:none;">
-                <div id="adminInterface" style="display:none;">
-                    <h2>Admin Interface</h2>
-                    <table id="userTable" border="1">
-                        <thead>
-                            <tr>
-                                <th>User ID</th>
-                                <th>Vehicle ID</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--User data will be populated here dynamically -->
-                        </tbody>
-                    </table>
-                    <form id="adminSearchForm">
-                        <label for="searchVehicleId">Enter Vehicle ID:</label>
-                        <input type="text" id="searchVehicleId" required>
-                        <button type="submit" action="#" method="POST">Search</button>
-                    </form>
-                </div>
-                <div id="journeyDetails" style="display:none;">
-                    <h3>Journey Details</h3>
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>Journey</th>
-                                <th>Distance</th>
-                                <th>Fee</th>
-                                <th>Payment Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Journey 1</td>
-                                <td id="journey1Distance"></td>
-                                <td id="journey1Fee"></td>
-                                <td id="journey1PaymentStatus"></td>
-                            </tr>
-                            <tr>
-                                <td>Journey 2</td>
-                                <td id="journey2Distance"></td>
-                                <td id="journey2Fee"></td>
-                                <td id="journey2PaymentStatus"></td>
-                            </tr>
-                            <tr>
-                                <td>Journey 3</td>
-                                <td id="journey3Distance"></td>
-                                <td id="journey3Fee"></td>
-                                <td id="journey3PaymentStatus"></td>
-                            </tr>
-                            <tr>
-                                <td>Journey 4</td>
-                                <td id="journey4Distance"></td>
-                                <td id="journey4Fee"></td>
-                                <td id="journey4PaymentStatus"></td>
-                            </tr>
-                            <tr>
-                                <td>Journey 5</td>
-                                <td id="journey5Distance"></td>
-                                <td id="journey5Fee"></td>
-                                <td id="journey5PaymentStatus"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h4>Total Summary</h4>
-                    <p>Total Distance: <span id="totalDistance"></span></p>
-                    <p>Total Fees: <span id="totalFees"></span></p>
+                    <div id="adminInterface" style="display:none;">
+                        <h2>Admin Interface</h2>
+                        <table id="userTable" border="1">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Vehicle ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--User data will be populated here dynamically -->
+                            </tbody>
+                        </table>
+                        <form id="adminSearchForm">
+                            <label for="searchVehicleId">Enter Vehicle ID:</label>
+                            <input type="text" id="searchVehicleId" required>
+                            <button type="submit" action="#" method="POST">Search</button>
+                        </form>
+                    </div>
+                    <div id="journeyDetails" style="display:none;">
+                        <h3>Journey Details</h3>
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th>Journey</th>
+                                    <th>Distance</th>
+                                    <th>Fee</th>
+                                    <th>Payment Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Journey 1</td>
+                                    <td id="journey1Distance"></td>
+                                    <td id="journey1Fee"></td>
+                                    <td id="journey1PaymentStatus"></td>
+                                </tr>
+                                <tr>
+                                    <td>Journey 2</td>
+                                    <td id="journey2Distance"></td>
+                                    <td id="journey2Fee"></td>
+                                    <td id="journey2PaymentStatus"></td>
+                                </tr>
+                                <tr>
+                                    <td>Journey 3</td>
+                                    <td id="journey3Distance"></td>
+                                    <td id="journey3Fee"></td>
+                                    <td id="journey3PaymentStatus"></td>
+                                </tr>
+                                <tr>
+                                    <td>Journey 4</td>
+                                    <td id="journey4Distance"></td>
+                                    <td id="journey4Fee"></td>
+                                    <td id="journey4PaymentStatus"></td>
+                                </tr>
+                                <tr>
+                                    <td>Journey 5</td>
+                                    <td id="journey5Distance"></td>
+                                    <td id="journey5Fee"></td>
+                                    <td id="journey5PaymentStatus"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h4>Total Summary</h4>
+                        <p>Total Distance: <span id="totalDistance"></span></p>
+                        <p>Total Fees: <span id="totalFees"></span></p>
+                    </div>
                 </div>
             </div>
             <div id="adminLogin">
