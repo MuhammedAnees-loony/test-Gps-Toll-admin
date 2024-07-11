@@ -63,7 +63,7 @@ nav ul li a:hover {
     border-radius: 5px;
 }
 
-#homeContent {
+.main-content {
     background: #fff;
     padding: 40px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
