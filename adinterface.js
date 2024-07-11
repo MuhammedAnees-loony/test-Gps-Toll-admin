@@ -1,3 +1,6 @@
+let journeyData = [];
+let distances = [];
+let fees = [];
 document.addEventListener('DOMContentLoaded', function() {
     // Dummy admin credentials for login
     const adminCredentials = {
