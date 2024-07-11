@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch data from CSV
     function fetchDataFromCSV() {
         // Replace with the path to your actual CSV file
-        const csvUrl = 'login.csv';
+        const csvUrl = 'https://github.com/MuhammedAnees-loony/test2/main/login.csv';
         return fetch(csvUrl)
             .then(response => response.text())
             .then(data => {
