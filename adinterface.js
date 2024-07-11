@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to fetch data from CSV file
     async function fetchDataFromCSV() {
-        const response = await fetch('https://raw.githubusercontent.com/MuhammedAnees-loony/test/main/login.csv');
+        const response = await fetch('https://github.com/MuhammedAnees-loony/test2/main/login.csv');
         const data = await response.text();
         const rows = data.split('\n').slice(1); // Remove header row
         return rows.map(row => {
