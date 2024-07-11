@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function() {
         adminInterface.style.display = 'block';
         journeyDetails.style.display = 'block';
         homeContent.style.display = 'block';
-        populateUserTables(); // Populate home user table
+        populateHomeUserTables(); // Populate home user table
     });
 
     // Switch to login/register tab on click
