@@ -74,7 +74,7 @@ function parseCSV(data) {
     
     // Populate both user tables
     function populateUserTables() {
-        fetchDataFromCSV().then(users => {
+        fetchUserData().then(users => {
             // Clear existing table bodies
             homeUserTableBody.innerHTML = '';
             userTableBody.innerHTML = '';
