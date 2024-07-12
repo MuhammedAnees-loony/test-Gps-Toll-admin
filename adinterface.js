@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('haii');
             users = parseCSV(data);
             console.log('User data fetched:', users);
-            return test;// Log the fetched user data for debugging
+            // Log the fetched user data for debugging
         })
         .catch(error => console.error('Error fetching user data:', error));
         
