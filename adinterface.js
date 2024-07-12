@@ -98,10 +98,8 @@ function parseCSV(data) {
                 }
             });
 
-            // Append the homeUserTableBody to the home table
-            const homeUserTable = document.querySelector('#homeUserTable tbody');
-            homeUserTable.innerHTML = ''; // Clear existing rows
-            homeUserTable.appendChild(homeUserTableBody);
+          
+            
         });
     }
 
