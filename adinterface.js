@@ -84,18 +84,6 @@ function parseCSV(data) {
     
             users.forEach(user => {
                 if (user.userId && user.vehicleId) {
-                    // Create row for admin interface table
-                    const adminRow = document.createElement('tr');
-                    const adminUserIdCell = document.createElement('td');
-                    const adminVehicleIdCell = document.createElement('td');
-    
-                    adminUserIdCell.textContent = user.userId;
-                    adminVehicleIdCell.textContent = user.vehicleId;
-    
-                    adminRow.appendChild(adminUserIdCell);
-                    adminRow.appendChild(adminVehicleIdCell);
-                    userTableBody.appendChild(adminRow);
-    
                     // Create row for home tab table
                     const homeRow = document.createElement('tr');
                     const homeUserIdCell = document.createElement('td');
