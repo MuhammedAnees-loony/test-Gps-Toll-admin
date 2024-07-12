@@ -50,8 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log('haii');
             users = parseCSV(data);
-            return users;
+           
             console.log('User data fetched:', users);
+             return users;
             // Log the fetched user data for debugging
         })
         .catch(error => console.error('Error fetching user data:', error));
