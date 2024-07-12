@@ -45,11 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function fetchUserData() {
     const userCsvPath = 'https://raw.githubusercontent.com/MuhammedAnees-loony/test/main/login.csv';  // GitHub URL for user data
 
-    return fetch(userCsvPath)
+     fetch(userCsvPath)
         .then(response => response.text())
         .then(data => {
             console.log('haii');
             users = parseCSV(data);
+            return users;
             console.log('User data fetched:', users);
             // Log the fetched user data for debugging
         })
