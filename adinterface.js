@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return fetch(csvUrl)
             .then(response => response.text())
             .then(data => {
-                console.log('User data fetched:', users);
+                console.log('User data fetched:');
                 const rows = data.split('\n').slice(1); // Skip header row
                 return rows.map(row => {
                     const [userId, vehicleId] = row.split(',');
