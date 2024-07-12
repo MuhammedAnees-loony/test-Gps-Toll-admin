@@ -90,9 +90,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     homeUserTableBody.appendChild(homeRow);
                 }
             });
+
+            // Append the homeUserTableBody to the home table
+            const homeUserTable = document.querySelector('#homeUserTable tbody');
+            homeUserTable.innerHTML = ''; // Clear existing rows
+            homeUserTable.appendChild(homeUserTableBody);
         });
     }
-        // Function to fetch journey data
+
+    // Function to fetch journey data
     function fetchJourneyData(vehicleId) {
         const apiUrl = 'http://127.0.0.1:5000/predict'; // Replace with your Flask API URL
     
@@ -117,27 +123,29 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             console.log('Journey data fetched successfully:', data);
-                let jsonObject = JSON.parse(data);
-    // Loop through the JSON object and extract values
-                jsonObject.forEach(item => {
-                    distances.push(item.distance);
-                    fees.push(item.fee);
-                });
-                displayJourneyData();
-    // Now you have two arrays: distances and fees
-                console.log("Distances:", distances);
-                console.log("Fees:", fees);
+            let jsonObject = JSON.parse(data);
+            // Loop through the JSON object and extract values
+            jsonObject.forEach(item => {
+                distances.push(item.distance);
+                fees.push(item.fee);
+            });
+            displayJourneyData();
+            // Now you have two arrays: distances and fees
+            console.log("Distances:", distances);
+            console.log("Fees:", fees);
         })
         .catch(error => {
             console.error('Error making POST request to Flask API:', error);
         });
     }
-        // Handle search form submission
-        adminSearchForm.addEventListener('submit', function(event) {
+
+    // Handle search form submission
+    adminSearchForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const vehicleId = searchVehicleId.value;
         fetchJourneyData(vehicleId); // Fetch journey data for the entered vehicle ID
     });
+
     // Function to display journey data
     function displayJourneyData() {
         // Check if fees and distances are arrays and not empty
@@ -172,8 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Fees or distances array is not valid or is empty.');
         }
     }  
+
     // Tab navigation functionality
-      homeTab.addEventListener('click', function() {
+    homeTab.addEventListener('click', function() {
         adminLogin.style.display = 'none';
         adminInterface.style.display = 'block';
         journeyDetails.style.display = 'block';
@@ -189,4 +198,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initial tab activation
     loginTab.click(); // Show login tab by default
-});    
+});
