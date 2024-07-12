@@ -83,7 +83,7 @@ function parseCSV(data) {
             userTableBody.innerHTML = '';
     
             users.forEach(user => {
-                if (user.userId.startsWith('CC-') && user.vehicleId.startsWith('V')) {
+                if (user.userId && user.vehicleId) {
                     // Create row for admin interface table
                     const adminRow = document.createElement('tr');
                     const adminUserIdCell = document.createElement('td');
