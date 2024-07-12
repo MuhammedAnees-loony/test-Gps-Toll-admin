@@ -42,20 +42,35 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Fetch data from CSV
-    function fetchDataFromCSV() {
-        // Replace with the path to your actual CSV file
-        const csvpath = 'https://raw.githubusercontent.com/MuhammedAnees-loony/test2/main/login.csv';
-        fetch(csvpath)
-            .then(response => response.text())
-            .then(data => {
-                console.log('User data fetched:');
-                const rows = data.split('\n').slice(1); // Skip header row
-                return rows.map(row => {
-                    const [userId, vehicleId] = row.split(',');
-                    return { userId, vehicleId };
-                });
-            });
+    function fetchUserData() {
+    const userCsvPath = 'https://raw.githubusercontent.com/MuhammedAnees-loony/test/main/login.csv';  // GitHub URL for user data
+
+    fetch(userCsvPath)
+        .then(response => response.text())
+        .then(data => {
+            console.log('haii');
+            users = parseCSV(data);
+            console.log('User data fetched:', users);  // Log the fetched user data for debugging
+        })
+        .catch(error => console.error('Error fetching user data:', error));
+}
+// Function to parse CSV text into JSON
+function parseCSV(data) {
+    const lines = data.split('\n').filter(line => line.trim() !== '');
+    const headers = lines[0].split(',');
+    const result = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        const obj = {};
+        const currentLine = lines[i].split(',');
+
+        for (let j = 0; j < headers.length; j++) {
+            obj[headers[j].trim()] = currentLine[j].trim();
+        }
+        result.push(obj);
     }
+    return result;
+}
     
     // Populate both user tables
     function populateUserTables() {
