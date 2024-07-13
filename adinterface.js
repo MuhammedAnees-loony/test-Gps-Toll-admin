@@ -40,70 +40,24 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Invalid credentials');
         }
     });
-    
-    // Fetch data from CSV
-    function fetchUserData() {
-    const userCsvPath = 'https://raw.githubusercontent.com/MuhammedAnees-loony/test2/main/login.csv';  // GitHub URL for user data
-
-    return fetch(userCsvPath)
-        .then(response => response.text())
-        .then(data => {
-            console.log('haii');
-            users = parseCSV(data);
-           
-            console.log('User data fetched:', users);
-             return users;
-            // Log the fetched user data for debugging
-        })
-        .catch(error => console.error('Error fetching user data:', error));
-        
-}
-// Function to parse CSV text into JSON
-function parseCSV(data) {
-    const lines = data.split('\n').filter(line => line.trim() !== '');
-    const headers = lines[0].split(',');
-    const result = [];
-
-    for (let i = 1; i < lines.length; i++) {
-        const obj = {};
-        const currentLine = lines[i].split(',');
-
-        for (let j = 0; j < headers.length; j++) {
-            obj[headers[j].trim()] = currentLine[j].trim();
-        }
-        result.push(obj);
-    }
-    return result;
-}
-    
-    // Populate both user tables
-    function populateUserTables() {
-        fetchUserData().then(users => {
-            // Clear existing table bodies
-            homeUserTableBody.innerHTML = '';
-            userTableBody.innerHTML = '';
-    
-            users.forEach(user => {
-                if (user.userId && user.vehicleId) {
-                    // Create row for home tab table
-                    const homeRow = document.createElement('tr');
-                    const homeUserIdCell = document.createElement('td');
-                    const homeVehicleIdCell = document.createElement('td');
-    
-                    homeUserIdCell.textContent = user.userId;
-                    homeVehicleIdCell.textContent = user.vehicleId;
-    
-                    homeRow.appendChild(homeUserIdCell);
-                    homeRow.appendChild(homeVehicleIdCell);
-                    homeUserTableBody.appendChild(homeRow);
-                }
+    function fetchAndDisplayUserData() {
+        fetch('login.csv')
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n').slice(1);
+                rows.forEach(row => {
+                    const [username, userId, vehicleId] = row.split(',');
+                    const tr = document.createElement('tr');
+                    const tdUserId = document.createElement('td');
+                    const tdVehicleId = document.createElement('td');
+                    tdUserId.textContent = userId;
+                    tdVehicleId.textContent = vehicleId;
+                    tr.appendChild(tdUserId);
+                    tr.appendChild(tdVehicleId);
+                    userTableBody.appendChild(tr);
+                });
             });
-
-          
-            
-        });
     }
-
     // Function to fetch journey data
     function fetchJourneyData(vehicleId) {
         const apiUrl = 'http://127.0.0.1:5001/predict'; // Replace with your Flask API URL
