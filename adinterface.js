@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Fetch data from CSV
     function fetchUserData() {
-    const userCsvPath = 'https://raw.githubusercontent.com/MuhammedAnees-loony/test/main/login.csv';  // GitHub URL for user data
+    const userCsvPath = 'https://raw.githubusercontent.com/MuhammedAnees-loony/test2/main/login.csv';  // GitHub URL for user data
 
     return fetch(userCsvPath)
         .then(response => response.text())
@@ -106,7 +106,7 @@ function parseCSV(data) {
 
     // Function to fetch journey data
     function fetchJourneyData(vehicleId) {
-        const apiUrl = 'http://127.0.0.1:5000/predict'; // Replace with your Flask API URL
+        const apiUrl = 'http://127.0.0.1:5001/predict'; // Replace with your Flask API URL
     
         // Prepare the request body
         const requestBody = {
