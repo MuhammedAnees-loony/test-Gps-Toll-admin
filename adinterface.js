@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
             adminLogin.style.display = 'none';
             adminInterface.style.display = 'none';
             homeContent.style.display = 'block'; // Show home tab contents
-            populateUserTables(); // Populate user tables
             homeTab.click(); // Activate home tab
         } else {
             alert('Invalid credentials');
@@ -147,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         adminInterface.style.display = 'block';
         journeyDetails.style.display = 'block';
         homeContent.style.display = 'block';
+        fetchAndDisplayUserData();
     });
     
     loginTab.addEventListener('click', function() {
