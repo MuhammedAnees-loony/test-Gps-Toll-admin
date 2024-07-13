@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 const rows = data.split('\n').slice(1);
                 rows.forEach(row => {
-                    const [userId, vehicleId] = row.split(',');
+                    const [username, password, userId, vehicleId] = row.split(',');
                     const tr = document.createElement('tr');
                     const tdUserId = document.createElement('td');
                     const tdVehicleId = document.createElement('td');
