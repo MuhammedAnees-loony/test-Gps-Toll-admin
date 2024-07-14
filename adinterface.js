@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json(); // Expecting JSON response
         })
         .then(data => {
-            console.log('Journey data fetched successfully:', data);
+            //console.log('Journey data fetched successfully:', data);
             let jsonObject = JSON.parse(data);
             // Loop through the JSON object and extract values
             jsonObject.forEach(item => {
@@ -90,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             displayJourneyData();
             // Now you have two arrays: distances and fees
-            console.log("Distances:", distances);
-            console.log("Fees:", fees);
+           // console.log("Distances:", distances);
+           // console.log("Fees:", fees);
         })
         .catch(error => {
             console.error('Error making POST request to Flask API:', error);
@@ -125,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     
             // Log the distances and fees for debugging
-            console.log("Distances:", distances);
-            console.log("Fees:", fees);
+           // console.log("Distances:", distances);
+          //  console.log("Fees:", fees);
     
             // Update the total distance and total toll
             const totalDistance = distances.reduce((acc, curr) => acc + parseFloat(curr), 0).toFixed(2);
